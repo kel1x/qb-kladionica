@@ -5,7 +5,7 @@
 
 - Check out his version ! [ESX]
 
-Add this to qb-core>shared>jobs.lua in order to work
+Add this to qb-core>shared>jobs.lua in order to work:
 
 
 	['kladionica'] = {
