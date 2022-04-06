@@ -1,4 +1,4 @@
-local QBCore = exports['galaxy-core']:GetCoreObject()
+local QBCore = exports['qb-core']:GetCoreObject()
 
 print("qb-kladionica | Kladionica Pokrenuta!")
 
