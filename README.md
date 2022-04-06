@@ -6,7 +6,8 @@ Check out his version ! [ESX]
 
 Add this to qb-core>shared>jobs.lua
 
-['kladionica'] = {
+
+	['kladionica'] = {
 		label = 'Kladionica',
 		defaultDuty = true,
 		offDutyPay = false,
