@@ -1,10 +1,11 @@
 # qb-kladionica
-Sports Betting / Kladionica [FiveM] | Optimised > 0.00ms
+- Sports Betting / Kladionica [FiveM] | Optimised > 0.00ms
 
-Credits to : https://github.com/tomiichx/tomic_kladionica
-Check out his version ! [ESX]
+- Credits to : https://github.com/tomiichx/tomic_kladionica
 
-Add this to qb-core>shared>jobs.lua
+- Check out his version ! [ESX]
+
+Add this to qb-core>shared>jobs.lua in order to work
 
 
 	['kladionica'] = {
