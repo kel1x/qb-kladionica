@@ -5,6 +5,12 @@
 
 - Check out his version ! [ESX]
 
+- Dependencies:
+
+	- qb-core
+	- zf_context
+	- zf_dialog
+
 Add this to qb-core>shared>jobs.lua in order to work:
 
 
