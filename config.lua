@@ -7,4 +7,6 @@ Config.Kladionica = {
     VlasnikPosao = 'kladionica', -- posao koji ima pristup gazda meni-u. // job that manages the matches.
     MinUlog = 100, -- Minimalni ulog // Min. Deposit
     MaxUlog = 50000, -- Maksimalni ulog // Max. Deposit
+    QBTarget = true,
 }
+

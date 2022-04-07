@@ -24,36 +24,6 @@ AddEventHandler('onResourceStart', function(resource)--if you restart the resour
     end
 end)
 
-function PomocniText(tekst)
-    SetTextComponentFormat("STRING")
-    AddTextComponentString(tekst)
-    DisplayHelpTextFromStringLabel(0, 0, 1, -1)
-end
-
-CreateThread(function()
-    while true do
-        Wait(0)
-        local igrac = PlayerPedId()
-        local kordinate = GetEntityCoords(igrac)
-        local distanca = #(kordinate - Config.Kladionica.Lokacija)
-        local spavaj = true
-        if distanca < 10 then
-            spavaj = false
-            DrawMarker(2, Config.Kladionica.Lokacija, 0.0, 0.0, 0.0, 0.0, 0, 0.0, 0.15, 0.15, 0.15, 200, 0, 50, 230, true, true, 2, true, false, false, false)
-            DrawMarker(2, Config.Kladionica.Lokacija, 0.0, 0.0, 0.0, 0.0, 0, 0.0, 0.2, 0.2, 0.2, 255, 255, 255, 150, false, true, 1, true, false, false, false)
-
-            if distanca < 1.5 then
-                PomocniText("Pritisnite ~INPUT_VEH_HORN~ da pogledate danasnju ponudu!")
-                if IsControlJustReleased(0, 38) then
-                    TriggerEvent('qb-kladionica:otvori')
-                end
-            end
-        end
-
-        if spavaj then Wait(2000) end
-    end
-end)
-
 RegisterNetEvent('qb-kladionica:otvori')
 AddEventHandler('qb-kladionica:otvori', function()
     QBCore.Functions.TriggerCallback('qb-kladionica:povuciutakmice', function(utakmicex)
@@ -519,3 +489,71 @@ AddEventHandler('qb-kladionica:ulozi', function(IDUtakmice)
         end
     end
 end)
+
+-- TARGET
+
+
+if Config.Kladionica.QBTarget then
+
+    TabelaZaPedove = {
+        {'ig_bankman', 308.58, -906.69, 28.29, 66.34}
+    }
+
+    Citizen.CreateThread(function()
+        for _,v in pairs(TabelaZaPedove) do
+            RequestModel(GetHashKey(v[1]))
+            while not HasModelLoaded(GetHashKey(v[1])) do
+                Wait(1)
+        end
+
+        PostaviPeda =  CreatePed(4, v[1],v[2],v[3],v[4],v[5], false, true)
+        FreezeEntityPosition(PostaviPeda, true)
+        SetEntityInvincible(PostaviPeda, true) 
+        SetBlockingOfNonTemporaryEvents(PostaviPeda, true) 
+        end
+    end)
+
+    Config.Peds = {
+        'ig_bankman'
+    }
+    exports['qb-target']:AddTargetModel(Config.Peds, {
+        options = {
+            {
+                event = "qb-kladionica:otvori",
+                icon = "fas fa-football",
+                label = "Pogledaj Ponudu",
+            },
+        },
+        distance = 2.5,
+    })
+
+else
+    function PomocniText(tekst)
+        SetTextComponentFormat("STRING")
+        AddTextComponentString(tekst)
+        DisplayHelpTextFromStringLabel(0, 0, 1, -1)
+    end 
+    CreateThread(function()
+        while true do
+            Wait(0)
+            local igrac = PlayerPedId()
+            local kordinate = GetEntityCoords(igrac)
+            local distanca = #(kordinate - Config.Kladionica.Lokacija)
+            local spavaj = true
+            if distanca < 10 then
+                spavaj = false
+                DrawMarker(2, Config.Kladionica.Lokacija, 0.0, 0.0, 0.0, 0.0, 0, 0.0, 0.15, 0.15, 0.15, 200, 0, 50, 230, true, true, 2, true, false, false, false)
+                DrawMarker(2, Config.Kladionica.Lokacija, 0.0, 0.0, 0.0, 0.0, 0, 0.0, 0.2, 0.2, 0.2, 255, 255, 255, 150, false, true, 1, true, false, false, false)
+    
+                if distanca < 1.5 then
+                    PomocniText("Pritisnite ~INPUT_VEH_HORN~ da pogledate danasnju ponudu!")
+                    if IsControlJustReleased(0, 38) then
+                        TriggerEvent('qb-kladionica:otvori')
+                    end
+                end
+            end
+    
+            if spavaj then Wait(2000) end
+        end
+    end)
+end        
