@@ -10,6 +10,9 @@
 	- qb-core
 	- zf_context
 	- zf_dialog
+	
+- Optional: 
+	- qb-target
 
 Add this to qb-core>shared>jobs.lua in order to work:
 
